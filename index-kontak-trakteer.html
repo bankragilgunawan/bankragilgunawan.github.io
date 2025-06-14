@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bank Ragil Apps</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #f7f7f7;
+      color: #333;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 0.2em;
+    }
+    .intro {
+      text-align: center;
+      font-size: 1.1em;
+      margin-bottom: 2em;
+      color: #555;
+    }
+    .app {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .app:nth-child(3) { animation-delay: 0.3s; }
+    .app:nth-child(4) { animation-delay: 0.6s; }
+    .app:nth-child(5) { animation-delay: 0.9s; }
+    .app:nth-child(6) { animation-delay: 1.2s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .app h2 {
+      margin: 0 0 5px;
+    }
+    .app p {
+      margin: 0 0 10px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .btn-trakteer {
+      display: block;
+      text-align: center;
+      margin: 30px auto 0;
+      font-size: 16px;
+      color: #e91e63;
+      text-decoration: none;
+    }
+    .btn-trakteer img {
+      margin-top: 10px;
+      width: 200px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌟 Aplikasi Karya Bank Ragil</h1>
+  <div class="intro">
+    Selamat datang! Ini kumpulan karya terbaik yang telah aku buat. Dijamin aman, ringan, dan tanpa iklan 😄<br>
+    Cocok buat harian, santai, dan produktif. Silakan dicoba satu per satu ya!
+  </div>
+
+  <div class="app">
+    <h2>🧾 Nota Belanja Retro</h2>
+    <p>Catat dan cetak nota belanja gaya retro. Bisa kirim ke WhatsApp dan simpan otomatis!</p>
+    <a class="btn" href="nota.html">Coba Sekarang</a>
+  </div>
+
+  <div class="app">
+    <h2>🎵 Pemutar Musik</h2>
+    <p>Putar lagu favorit dari HP kamu, lengkap dengan playlist, shuffle, dan mode gelap.</p>
+    <a class="btn" href="musik.html">Coba Sekarang</a>
+  </div>
+
+  <div class="app">
+    <h2>📒 Catatan Keuangan</h2>
+    <p>Atur keuangan harian, lihat grafik pemasukan & pengeluaran, aman dan ringan.</p>
+    <a class="btn" href="catatan-keuangan.html">Coba Sekarang</a>
+  </div>
+
+  <div class="app">
+    <h2>🎲 Prediksi Sicbo</h2>
+    <p>Masukkan angka, lihat hasil besar/kecil, ganjil/genap, deteksi pola otomatis!</p>
+    <a class="btn" href="prediksi-sicbo.html">Coba Sekarang</a>
+  </div>
+
+  <a class="btn-trakteer" href="https://bankragilgunawan.wordpress.com/wp-content/uploads/2025/06/img_20250603_0835236907856793821977069.jpg" target="_blank">
+    ☕ Dukung aku di Trakteer!<br>
+    <img src="https://bankragilgunawan.wordpress.com/wp-content/uploads/2025/06/img_20250603_0835236907856793821977069.jpg" alt="QR Trakteer">
+  </a>
+
+  <div style="text-align: center; margin-top: 30px;">
+    <button onclick="toggleContact()" style="padding: 10px 20px; border: none; border-radius: 8px; background: #2196f3; color: white; font-size: 16px;">📞 Kontak</button>
+    <div id="contact-options" style="display: none; margin-top: 15px;">
+      <a href="mailto:bankragil@email.com" class="btn" style="background:#ff5722;margin:5px;">Email</a>
+      <a href="https://wa.me/6281234567890" class="btn" style="background:#25d366;margin:5px;" target="_blank">WhatsApp</a>
+      <a href="https://t.me/bankragil" class="btn" style="background:#0088cc;margin:5px;" target="_blank">Telegram</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleContact() {
+      const div = document.getElementById('contact-options');
+      if (div.style.display === 'none') {
+        div.style.display = 'block';
+        div.style.animation = 'fadeSlide 0.4s ease forwards';
+      } else {
+        div.style.display = 'none';
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <footer>
+    &copy; 2025 Bank Ragil | Dibuat dengan ❤️ dan sinyal kampung
+  </footer>
+</body>
+</html>
