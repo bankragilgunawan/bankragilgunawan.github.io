@@ -111,3 +111,612 @@
             font-size: 0.9rem;
             transition: all 0.3s ease;
             border: none;
+            cursor: pointer;
+        }
+
+        .support-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+        }
+
+        .nav-button {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .nav-button.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #3b82f6;
+            border-radius: 1px;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-header {
+            padding: 25px 25px 0 25px;
+        }
+
+        .project-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            font-size: 22px;
+            color: white;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .status-coming {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .project-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .project-body {
+            padding: 0 25px 25px 25px;
+        }
+
+        .project-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #3b82f6;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        /* Recommendation Section */
+        .recommendation-section {
+            background: white;
+            border-radius: 10px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .recommendation-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .recommendation-text {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25d366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            background: #128c7e;
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            color: #94a3b8;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: #94a3b8;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #3b82f6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .contact-info {
+                justify-content: center;
+            }
+
+            .nav-container {
+                padding: 0 10px;
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .nav-button {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .project-card {
+                margin-bottom: 15px;
+            }
+
+            .recommendation-section {
+                padding: 25px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Color Classes */
+        .color-1 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .color-2 { background: linear-gradient(135deg, #10b981, #059669); }
+        .color-3 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .color-4 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .color-5 { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .color-6 { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .color-7 { background: linear-gradient(135deg, #f97316, #ea580c); }
+        .color-8 { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .color-9 { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-image">
+                    <img src="https://bankragilgunawan.wordpress.com/wp-content/uploads/2025/07/fb_img_17536154523841940721705341800038.jpg" alt="Bank Ragil Gunawan">
+                </div>
+                <div class="profile-info">
+                    <h1>Bank Ragil Gunawan</h1>
+                    <div class="title">Pengembang Full Stack & Pengusaha Digital</div>
+                    <div class="contact-info">
+                        <a href="https://wa.me/62816308466" class="contact-item" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>+62 816-308-466</span>
+                        </a>
+                        <a href="mailto:bankragilgunawan@gmail.com" class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>bankragilgunawan@gmail.com</span>
+                        </a>
+                    </div>
+                    <div class="support-section">
+                        <p>Dukung karya saya dan bantu wujudkan proyek inovatif</p>
+                        <a href="https://trakteer.id/bankragilgunawan" class="support-link" target="_blank">
+                            <i class="fas fa-coffee"></i> Dukung via Trakteer. id
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-buttons">
+                <a href="#digital" class="nav-button active">
+                    <i class="fas fa-laptop-code"></i>
+                    Proyek Digital
+                </a>
+                <a href="#community" class="nav-button">
+                    <i class="fas fa-users"></i>
+                    Proyek Komunitas
+                </a>
+                <a href="#contact" class="nav-button">
+                    <i class="fas fa-comments"></i>
+                    Kontak
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Digital Projects Section -->
+            <section id="digital">
+                <h2 class="section-title">Proyek Digital</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-1">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3 class="project-title">Sistem Bot Pembayaran</h3>
+                            <p class="project-desc">Solusi pembayaran otomatis dengan integrasi multi-gateway untuk transaksi digital yang mulus. Dilengkapi protokol keamanan tingkat lanjut dan antarmuka pengguna yang intuitif.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="/bot-payment" class="project-link">
+                                Lihat Proyek <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-2">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3 class="project-title">Platform Manajemen Target</h3>
+                            <p class="project-desc">Sistem pelacakan tujuan yang komprehensif dengan implementasi metodologi SMART, monitoring progres real-time, dan sistem pengingat cerdas.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="/target" class="project-link">
+                                Lihat Proyek <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-3">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <h3 class="project-title">Pemutar Musik Pro</h3>
+                            <p class="project-desc">Platform streaming audio premium dengan kualitas suara tinggi, rekomendasi personal, dan manajemen pustaka musik yang luas.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="/musik" class="project-link">
+                                Lihat Proyek <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-4">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <h3 class="project-title">Manajer Tautan Cerdas</h3>
+                            <p class="project-desc">Sistem manajemen bookmark tingkat lanjut dengan kategorisasi cerdas, pencarian instan, dan sinkronisasi lintas perangkat.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="/link" class="project-link">
+                                Lihat Proyek <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-5">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h3 class="project-title">Platform Hadiah Pernikahan</h3>
+                            <p class="project-desc">Solusi hadiah pernikahan kreatif dengan template yang dapat disesuaikan, pesan personal, dan fitur hadiah kolaboratif.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="/kado" class="project-link">
+                                Lihat Proyek <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-6">
+                                <i class="fas fa-receipt"></i>
+                            </div>
+                            <h3 class="project-title">Generator Struk Retro</h3>
+                            <p class="project-desc">Alat pembuatan struk profesional dengan estetika desain vintage, kalkulasi pajak otomatis, dan opsi pencetakan ramah lingkungan.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="/struk-belanja" class="project-link">
+                                Lihat Proyek <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-7">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3 class="project-title">Pelacak Keuangan</h3>
+                            <p class="project-desc">Aplikasi manajemen keuangan pribadi yang komprehensif dengan dashboard analitik, pelacakan anggaran, dan pelaporan otomatis.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="/catatan-keuangan" class="project-link">
+                                Lihat Proyek <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Projects Section -->
+            <section id="community" style="display: none;">
+                <h2 class="section-title">Proyek Komunitas</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-8">
+                                <i class="fas fa-cut"></i>
+                            </div>
+                            <h3 class="project-title">Barberman</h3>
+                            <span class="project-status status-active">AKTIF</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Jl. Kemang Indah Blok C</span>
+                            </div>
+                            <p class="project-desc">Layanan cukur rambut profesional dengan standar kebersihan tinggi. Menawarkan berbagai layanan perawatan rambut dan janggut dengan teknik modern dengan harga terjangkau.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="/pangkas-rambut" class="project-link">
+                                Pelajari Lebih <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon color-9">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h3 class="project-title">Bakso Tiga Saudara</h3>
+                            <span class="project-status status-coming">SEGERA HADIR</span>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Jl. Muara Kuang Depan Alfamart</span>
+                            </div>
+                            <p class="project-desc">Restoran bakso keluarga dengan resep turun-temurun. Menyajikan bakso berkualitas tinggi dengan kuah istimewa dan pelengkap yang lengkap.</p>
+                        </div>
+                        <div class="project-body">
+                            <a href="#" class="project-link" style="background: #94a3b8; cursor: not-allowed;">
+                                Segera Hadir <i class="fas fa-clock"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendation Section -->
+            <section id="contact" style="display: none;">
+                <div class="recommendation-section">
+                    <h3 class="recommendation-title">Punya Ide Proyek?</h3>
+                    <p class="recommendation-text">Apakah Anda memiliki ide proyek menarik yang ingin diwujudkan? Saya siap membantu mewujudkan visi Anda menjadi kenyataan. Mari kita diskusikan dan berkolaborasi!</p>
+                    <a href="https://wa.me/62816308466" class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Diskusi di WhatsApp
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2024 Bank Ragil Gunawan. Hak Cipta Dilindungi.</p>
+                <p>Membangun solusi inovatif untuk masa depan digital yang lebih baik.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/62816308466" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:bankragilgunawan@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <a href="https://trakteer.id/bankragilgunawan" target="_blank"><i class="fas fa-coffee"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab navigation functionality
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all buttons
+                document.querySelectorAll('.nav-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Hide all sections
+                document.querySelectorAll('section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show the selected section
+                const target = this.getAttribute('href');
+                document.querySelector(target).style.display = 'block';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
