@@ -5,193 +5,713 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ragil Gunawan | Creative Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-dark: #050505;
-            --accent: #00d2ff;
-        }
-        body { 
-            background-color: var(--bg-dark); 
-            color: #ffffff; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .glass:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: var(--accent);
-            transform: scale(1.02);
-        }
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.15) 0%, transparent 50%);
+            --bg-dark: #030303;
+            --accent-cyan: #00e5ff;
+            --accent-purple: #a855f7;
+            --accent-orange: #f97316;
+            --card-bg: rgba(255, 255, 255, 0.02);
         }
         
-        /* Style khusus untuk domain .my.id */
-        .domain-tag {
-            font-size: 0.2em;
-            vertical-align: bottom;
-            color: var(--accent);
-            letter-spacing: 2px;
-            margin-left: 5px;
-            position: relative;
-            bottom: 10px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        .contact-grid {
-            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
-            border-radius: 40px;
-            padding: 40px;
-            border: 1px solid rgba(255,255,255,0.05);
+        
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .bg-glow-1 {
+            top: -200px;
+            right: -200px;
+            background: var(--accent-cyan);
+            animation: floatGlow 15s ease-in-out infinite;
+        }
+        
+        .bg-glow-2 {
+            bottom: -200px;
+            left: -200px;
+            background: var(--accent-purple);
+            animation: floatGlow 18s ease-in-out infinite reverse;
+        }
+        
+        @keyframes floatGlow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.1); }
+        }
+        
+        /* Glass Card */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Hero Section */
+        .hero-badge {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            animation: pulse-border 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(0, 229, 255, 0.2); }
+            50% { border-color: rgba(0, 229, 255, 0.5); }
+        }
+        
+        .hero-title {
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .domain-tag {
+            font-size: 0.18em;
+            vertical-align: super;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-left: 8px;
+            letter-spacing: 3px;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #ffffff, #e0e0e0);
+            color: #030303;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--accent-cyan), #00b8d4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* Project Card */
+        .project-card {
+            position: relative;
+        }
+        
+        .project-card .icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .project-card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        /* Featured Card - Jasa Website */
+        .featured-card {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(168, 85, 247, 0.08));
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0.5;
+            animation: border-rotate 4s linear infinite;
+        }
+        
+        @keyframes border-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        .featured-card .featured-badge {
+            position: absolute;
+            top: -12px;
+            right: 24px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: #030303;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.3), transparent);
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateY(-4px);
+        }
+        
+        .contact-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            font-size: 28px;
+        }
+        
+        .contact-item:hover .contact-icon {
+            transform: scale(1.15) rotate(-5deg);
+        }
+        
+        .contact-icon.trakteer {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(249, 115, 22, 0.05));
+            color: #f97316;
+        }
+        
+        .contact-icon.whatsapp {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
+            color: #22c55e;
+        }
+        
+        .contact-icon.email {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(0, 229, 255, 0.05));
+            color: var(--accent-cyan);
+        }
+        
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.5;
+            animation: bounce-scroll 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce-scroll {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-grid {
+                flex-direction: column;
+            }
+            
+            .contact-item {
+                padding: 24px 16px;
+            }
+            
+            .contact-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
 
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 hero-gradient">
-        <div data-aos="fade-up" data-aos-duration="1000">
-            <span class="px-4 py-2 rounded-full bg-white/5 text-xs font-semibold tracking-widest uppercase mb-6 inline-block border border-white/10 text-sky-400">Creative Developer</span>
-            <h1 class="text-6xl md:text-8xl font-extrabold mb-6 tracking-tighter">
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative">
+        <div class="relative z-10">
+            <div class="reveal mb-8">
+                <span class="hero-badge px-5 py-2.5 rounded-full text-xs font-semibold tracking-[0.2em] uppercase inline-block" style="color: var(--accent-cyan);">
+                    Creative Developer
+                </span>
+            </div>
+            
+            <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight reveal reveal-delay-1">
                 Ragil Gunawan<span class="domain-tag">.MY.ID</span>
             </h1>
-            <p class="text-gray-400 max-w-xl mx-auto text-lg md:text-xl leading-relaxed">Membangun ekosistem digital yang efisien, fungsional, dan estetis. Fokus pada solusi, bukan sekadar kode.</p>
-        </div>
-        <div class="mt-12 flex gap-4" data-aos="fade-up" data-aos-delay="200">
-            <a href="#projects" class="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-sky-400 hover:text-white transition-all">Lihat Karya</a>
-            <a href="#contact" class="px-8 py-4 glass font-bold rounded-full">Hubungi Saya</a>
-        </div>
-    </section>
-
-    <section id="projects" class="py-32 px-6 max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-            <div>
-                <h2 class="text-4xl font-bold mb-2" data-aos="fade-right">Selected Works</h2>
-                <p class="text-gray-500" data-aos="fade-right" data-aos-delay="100">Kumpulan solusi digital yang saya bangun.</p>
+            
+            <p class="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg md:text-xl leading-relaxed mb-12 reveal reveal-delay-2">
+                Membangun ekosistem digital yang efisien, fungsional, dan estetis. 
+                <span class="text-gray-300">Fokus pada solusi, bukan sekadar kode.</span>
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-3">
+                <a href="#projects" class="btn-primary px-10 py-4 rounded-full font-semibold text-sm tracking-wide">
+                    Lihat Karya
+                </a>
+                <a href="#contact" class="btn-outline px-10 py-4 rounded-full font-semibold text-sm tracking-wide text-white">
+                    Hubungi Saya
+                </a>
             </div>
-            <div class="text-sky-400 font-mono text-sm" data-aos="fade-left">PORTFOLIO '26</div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <a href="/Icell" data-aos="fade-up" class="glass p-8 rounded-3xl block group">
-                <i class="fa-solid fa-bolt-lightning text-yellow-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">ICELL Hub</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Pusat transaksi pulsa, data, dan e-wallet tercepat. Dirancang untuk keandalan tinggi dalam setiap transaksi digital Anda.</p>
-            </a>
-
-            <a href="/bot-payment/" data-aos="fade-up" data-aos-delay="100" class="glass p-8 rounded-3xl block">
-                <i class="fa-solid fa-robot text-indigo-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Smart Bot Payment</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Asisten otomatisasi pembayaran 24/7. Membantu mengelola transaksi toko secara instan sesuai kebutuhan alur bisnismu.</p>
-            </a>
-
-            <a href="/target/" data-aos="fade-up" data-aos-delay="200" class="glass p-8 rounded-3xl block">
-                <i class="fa-solid fa-bullseye text-red-500 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Capai Target</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Manajemen progres tanpa kertas. Simpan dan pantau semua targetmu secara digital agar lebih mudah dicapai setiap harinya.</p>
-            </a>
-
-            <a href="/musik/" data-aos="fade-up" class="glass p-8 rounded-3xl block">
-                <i class="fa-solid fa-headphones text-pink-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Pure Audio</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Pemutar musik offline eksklusif dari ponselmu. Nikmati suara jernih tanpa gangguan iklan yang memutus alur musikmu.</p>
-            </a>
-
-            <a href="/link/" data-aos="fade-up" data-aos-delay="100" class="glass p-8 rounded-3xl block">
-                <i class="fa-solid fa-link text-sky-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Link Vault</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Simpan koleksi link video favoritmu di sini. Tidak perlu takut kehilangan link, cukup simpan dan putar kapan saja sesukamu.</p>
-            </a>
-
-            <a href="/kado/" data-aos="fade-up" data-aos-delay="200" class="glass p-8 rounded-3xl block">
-                <i class="fa-solid fa-gift text-orange-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Kado Spesial</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Wujudkan momen berharga dengan kado online unik. Berikan kejutan yang spesial untuk orang terdekat melalui sentuhan digital.</p>
-            </a>
-
-            <a href="/struk-belanja/" data-aos="fade-up" class="glass p-8 rounded-3xl block">
-                <i class="fa-solid fa-file-invoice-dollar text-emerald-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Struk Belanja Pro</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Kelola bukti belanja secara efisien, bahkan saat offline. Tersedia versi Pro dengan fitur manajemen transaksi yang jauh lebih lengkap.</p>
-            </a>
-
-            <a href="/catatan-keuangan/" data-aos="fade-up" data-aos-delay="100" class="glass p-8 rounded-3xl block">
-                <i class="fa-solid fa-wallet text-blue-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Money Tracker</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Lihat ke mana uangmu mengalir. Pantau setiap pengeluaran dan pemasukan agar kondisi finansialmu tetap terjaga sehat.</p>
-            </a>
-
-            <a href="/catatan-hutang/" data-aos="fade-up" data-aos-delay="200" class="glass p-8 rounded-3xl block">
-                <i class="fa-solid fa-book-open text-red-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Buku Hutang Digital</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Digitalisasi catatan hutang tokomu. Lengkap dengan fitur pengingat otomatis ke konsumen hanya dengan satu kali klik.</p>
-            </a>
-
-            <a href="/pangkas-rambut/" data-aos="fade-up" class="glass p-8 rounded-3xl block border-sky-500/30 border-2">
-                <i class="fa-solid fa-shop text-sky-400 text-3xl mb-6"></i>
-                <h3 class="text-2xl font-bold mb-2">Buat Toko Online</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Buat tokomu dikenal dunia. Bangun kehadiran online profesional dengan harga bersahabat. Mari diskusikan idemu sekarang!</p>
-                <span class="text-xs font-bold tracking-widest text-sky-400 uppercase mt-4 block">Konsultasi Gratis →</span>
-            </a>
-            
+        <div class="scroll-indicator">
+            <span class="text-[10px] tracking-[0.3em] text-gray-500 uppercase">Scroll</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-500">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
         </div>
     </section>
 
-    <section id="contact" class="py-32 px-6">
-        <div class="max-w-5xl mx-auto">
-            <div class="contact-grid">
-                <div class="text-center mb-16" data-aos="zoom-in">
-                    <h2 class="text-4xl font-bold mb-4">Let's Connect</h2>
-                    <p class="text-gray-500">Punya proyek impian atau sekadar ingin menyapa? Saya selalu siap untuk berdiskusi.</p>
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 sm:py-32 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+                <div>
+                    <p class="text-xs font-medium tracking-[0.3em] uppercase mb-3" style="color: var(--accent-cyan);">Portfolio</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 reveal">Selected Works</h2>
+                    <p class="text-gray-500 text-sm sm:text-base">Kumpulan solusi digital yang saya bangun.</p>
+                </div>
+                <div class="text-xs font-mono tracking-wider text-gray-600 reveal">2024 — 2026</div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- CuanPulsa - NEW -->
+                <a href="/cuan-pulsa" class="glass-card project-card p-8 rounded-3xl block reveal">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">CuanPulsa</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Tukar pulsamu jadi Saldo eWallet dengan rate tertinggi. Proses cepat, aman, dan terpercaya.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #10b981;">Pulsa → E-Wallet</span>
+                </a>
+
+                <!-- ICCell Hub -->
+                <a href="/Icell" class="glass-card project-card p-8 rounded-3xl block reveal reveal-delay-1">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(250, 204, 21, 0.15), rgba(250, 204, 21, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">ICELL Hub</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Pusat transaksi pulsa, data, dan e-wallet tercepat. Dirancang untuk keandalan tinggi.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #facc15;">Digital Transaction</span>
+                </a>
+
+                <!-- Bot Payment -->
+                <a href="/bot-payment/" class="glass-card project-card p-8 rounded-3xl block reveal reveal-delay-2">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="10" rx="2"/>
+                            <circle cx="12" cy="16" r="1"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Bot Payment</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Asisten otomatisasi pembayaran 24/7 untuk mengelola transaksi toko secara instan.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #a855f7;">Automation</span>
+                </a>
+
+                <!-- Capai Target -->
+                <a href="/target/" class="glass-card project-card p-8 rounded-3xl block reveal">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Capai Target</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Manajemen progres tanpa kertas. Pantau semua target secara digital setiap harinya.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #ef4444;">Productivity</span>
+                </a>
+
+                <!-- Pure Audio -->
+                <a href="/musik/" class="glass-card project-card p-8 rounded-3xl block reveal reveal-delay-1">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Pure Audio</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Pemutar musik offline eksklusif. Nikmati suara jernih tanpa gangguan iklan.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #ec4899;">Music Player</span>
+                </a>
+
+                <!-- Link Vault -->
+                <a href="/link/" class="glass-card project-card p-8 rounded-3xl block reveal reveal-delay-2">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(0, 229, 255, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Link Vault</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Simpan koleksi link video favoritmu. Aman dan mudah diakses kapan saja.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #00e5ff;">Bookmark Manager</span>
+                </a>
+
+                <!-- Kado Spesial -->
+                <a href="/kado/" class="glass-card project-card p-8 rounded-3xl block reveal">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(249, 115, 22, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2">
+                            <rect x="3" y="8" width="18" height="13" rx="2"/>
+                            <path d="M12 8V21"/>
+                            <path d="M3 12h18"/>
+                            <path d="M12 8a4 4 0 0 0-4-4c-1.5 0-2.5 1-2.5 2.5S7 8 8 8h4"/>
+                            <path d="M12 8a4 4 0 0 1 4-4c1.5 0 2.5 1 2.5 2.5S17 8 16 8h-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Kado Spesial</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Wujudkan momen berharga dengan kado online unik untuk orang terdekat.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #f97316;">Digital Gift</span>
+                </a>
+
+                <!-- Struk Belanja -->
+                <a href="/struk-belanja/" class="glass-card project-card p-8 rounded-3xl block reveal reveal-delay-1">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <line x1="10" y1="9" x2="8" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Struk Belanja Pro</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Kelola bukti belanja secara efisien dengan fitur manajemen lengkap.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #22c55e;">Receipt Manager</span>
+                </a>
+
+                <!-- Money Tracker -->
+                <a href="/catatan-keuangan/" class="glass-card project-card p-8 rounded-3xl block reveal reveal-delay-2">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M12 8v8"/>
+                            <path d="M8 12h8"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Money Tracker</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Pantau setiap pengeluaran dan pemasukan agar finansial tetap sehat.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #3b82f6;">Finance</span>
+                </a>
+
+                <!-- Buku Hutang -->
+                <a href="/catatan-hutang/" class="glass-card project-card p-8 rounded-3xl block reveal">
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                            <line x1="12" y1="6" x2="12" y2="12"/>
+                            <line x1="9" y1="9" x2="15" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Buku Hutang Digital</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Digitalisasi catatan hutang toko dengan fitur pengingat otomatis.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="color: #ef4444;">Debt Management</span>
+                </a>
+
+                <!-- JASA WEBSITE - FEATURED -->
+                <a href="/konsultasi" class="featured-card glass-card project-card p-8 rounded-3xl block reveal reveal-delay-1 col-span-1 md:col-span-2 lg:col-span-1">
+                    <span class="featured-badge">Layanan Unggulan</span>
+                    <div class="icon-wrapper" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(168, 85, 247, 0.1));">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Jasa Pembuatan Website</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Buat tokomu dikenal dunia. Website profesional dengan harga bersahabat.</p>
+                    <span class="text-[10px] font-semibold tracking-[0.15em] uppercase" style="background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Konsultasi Gratis</span>
+                </a>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 sm:py-32 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="contact-container p-8 sm:p-12">
+                <div class="text-center mb-12 reveal">
+                    <p class="text-xs font-medium tracking-[0.3em] uppercase mb-3" style="color: var(--accent-cyan);">Connect</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
+                    <p class="text-gray-500 text-sm sm:text-base">Punya proyek impian atau sekadar ingin menyapa? Saya selalu siap untuk berdiskusi.</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <a href="https://trakteer.id/bankragilgunawan" target="_blank" class="flex flex-col items-center p-8 glass rounded-3xl group hover:bg-orange-500/10 transition-all" data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-mug-hot text-orange-500 text-2xl"></i>
+                <div class="flex flex-col md:flex-row justify-center items-stretch gap-4 md:gap-6 contact-grid reveal reveal-delay-1">
+                    <!-- Trakteer -->
+                    <a href="https://trakteer.id/bankragilgunawan" target="_blank" class="contact-item flex-1 group">
+                        <div class="contact-icon trakteer">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+                                <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/>
+                                <line x1="6" y1="2" x2="6" y2="4"/>
+                                <line x1="10" y1="2" x2="10" y2="4"/>
+                                <line x1="14" y1="2" x2="14" y2="4"/>
+                            </svg>
                         </div>
-                        <h4 class="font-bold text-lg mb-1">Support Me</h4>
-                        <p class="text-gray-500 text-[10px]">Trakteer/bankragilgunawan</p>
+                        <h4 class="font-bold text-lg mb-2">Support Me</h4>
+                        <p class="text-gray-500 text-xs tracking-wide">Trakteer</p>
                     </a>
 
-                    <a href="https://wa.me/6282121218466" target="_blank" class="flex flex-col items-center p-8 glass rounded-3xl group hover:bg-green-500/10 transition-all" data-aos="fade-up" data-aos-delay="200">
-                        <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i>
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/6282121218466" target="_blank" class="contact-item flex-1 group">
+                        <div class="contact-icon whatsapp">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
                         </div>
-                        <h4 class="font-bold text-lg mb-1">WhatsApp</h4>
-                        <p class="text-gray-500 text-[10px]">0821-2121-8466</p>
+                        <h4 class="font-bold text-lg mb-2">WhatsApp</h4>
+                        <p class="text-gray-500 text-xs tracking-wide">0821-2121-8466</p>
                     </a>
 
-                    <a href="mailto:bankragilgunawan@gmail.com" class="flex flex-col items-center p-8 glass rounded-3xl group hover:bg-sky-500/10 transition-all" data-aos="fade-up" data-aos-delay="300">
-                        <div class="w-16 h-16 bg-sky-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-envelope text-sky-500 text-2xl"></i>
+                    <!-- Email -->
+                    <a href="mailto:bankragilgunawan@gmail.com" class="contact-item flex-1 group">
+                        <div class="contact-icon email">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
                         </div>
-                        <h4 class="font-bold text-lg mb-1">Mail Me</h4>
-                        <p class="text-gray-500 text-[10px]">bankragilgunawan@gmail.com</p>
+                        <h4 class="font-bold text-lg mb-2">Email</h4>
+                        <p class="text-gray-500 text-xs tracking-wide">bankragilgunawan</p>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-10 text-center text-gray-600 text-[10px] tracking-[4px] uppercase">
-        Crafted by Ragil Gunawan &copy; 2026
+    <!-- Footer -->
+    <footer class="py-12 text-center relative z-10">
+        <p class="text-gray-600 text-[10px] tracking-[0.4em] uppercase">
+            Crafted with precision by Ragil Gunawan
+        </p>
+        <p class="text-gray-700 text-[10px] tracking-wider mt-2">2024 — 2026</p>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            once: true
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 100;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        // Initial check
+        window.addEventListener('load', revealOnScroll);
+        window.addEventListener('scroll', revealOnScroll);
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Parallax effect for background glows
+        let ticking = false;
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const glow1 = document.querySelector('.bg-glow-1');
+                    const glow2 = document.querySelector('.bg-glow-2');
+                    
+                    if (glow1 && glow2) {
+                        glow1.style.transform = `translate(${scrolled * 0.05}px, ${scrolled * 0.03}px)`;
+                        glow2.style.transform = `translate(${scrolled * -0.03}px, ${scrolled * -0.05}px)`;
+                    }
+                    
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
     </script>
 </body>
-</html>
+                            </html>
