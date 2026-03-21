@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+      <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BGN1F56R3S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BGN1F56R3S');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ragil Gunawan | Creative Developer</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --accent: #00d4aa;
+  --accent-secondary: #ff6b35;
+  --text-primary: #f0f0f5;
+  --text-muted: #6b7280;
+  --border: rgba(255,255,255,0.06);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Animated Background */
+.bg-gradient-animate {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% -20%, rgba(0,212,170,0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255,107,53,0.1), transparent),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Floating Orbs */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,212,170,0.2), transparent 70%);
+  top: -10%;
+  left: -10%;
+  animation: float1 20s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,107,53,0.15), transparent 70%);
+  bottom: 10%;
+  right: -5%;
+  animation: float2 25s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0,150,255,0.1), transparent 70%);
+  top: 50%;
+  left: 50%;
+  animation: float3 18s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, 50px) scale(1.1); }
+  66% { transform: translate(50px, 100px) scale(0.9); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-80px, -40px) scale(1.15); }
+  66% { transform: translate(-40px, 60px) scale(0.85); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-30%, -70%) scale(1.2); }
+}
+
+/* Cursor Glow */
+.cursor-glow {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,212,170,0.15), transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.3s;
+}
+
+/* Loader */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loader-bar {
+  margin-top: 24px;
+  width: 120px;
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loader-bar::after {
+  content: '';
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  animation: loading 1s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 24px;
+  transition: background 0.3s, backdrop-filter 0.3s;
+}
+
+nav.scrolled {
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  background: rgba(255,255,255,0.03);
+  padding: 6px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 10px 20px;
+  border-radius: 100px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-link.active {
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-weight: 600;
+}
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--accent), #00b894);
+  color: var(--bg-primary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+}
+
+/* Mobile Menu */
+.mobile-toggle {
+  display: none;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta {
+    display: none;
+  }
+  .mobile-toggle {
+    display: block;
+  }
+}
+
+/* Sections */
+section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Section */
+#home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 24px 80px;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,212,170,0.1);
+  border: 1px solid rgba(0,212,170,0.2);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero-title {
+  font-size: clamp(40px, 10vw, 80px);
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+
+.hero-title .name {
+  display: block;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 50%, var(--accent-secondary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+.hero-subtitle {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-typing {
+  font-size: 18px;
+  color: var(--accent);
+  font-weight: 500;
+  min-height: 28px;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--accent), #00b894);
+  color: var(--bg-primary);
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0,212,170,0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.03);
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: 1px solid var(--border);
+  font-size: 15px;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+#about {
+  padding: 120px 24px;
+  position: relative;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: 64px;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--text-primary);
+  max-width: 600px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 64px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.about-image {
+  position: relative;
+}
+
+.about-image-frame {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 320px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0,212,170,0.2), rgba(255,107,53,0.1));
+  border: 1px solid var(--border);
+}
+
+.about-image-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(135deg, transparent 40%, rgba(0,212,170,0.1) 100%),
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05), transparent);
+}
+
+.about-avatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 80px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.stat-item {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.stat-item:hover {
+  background: rgba(0,212,170,0.05);
+  border-color: rgba(0,212,170,0.2);
+}
+
+.stat-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.about-content h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.about-content h3 span {
+  color: var(--accent);
+}
+
+.about-content p {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+
+@media (max-width: 600px) {
+  .about-highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
+.highlight-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: all 0.3s;
+}
+
+.highlight-item:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateX(8px);
+}
+
+.highlight-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,212,170,0.1);
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.highlight-text h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.highlight-text p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Projects Section */
+#projects {
+  padding: 120px 24px;
+  background: linear-gradient(180deg, transparent, rgba(0,212,170,0.02), transparent);
+}
+
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-category {
+  margin-bottom: 64px;
+}
+
+.category-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.category-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0,212,170,0.15), rgba(0,212,170,0.05));
+  border-radius: 14px;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.category-title h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.category-title p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  position: relative;
+  display: block;
+  padding: 28px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,170,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0,212,170,0.3);
+  box-shadow: 0 0 0 1px rgba(0,212,170,0.4),
+              0 20px 50px rgba(0,0,0,0.4);
+}
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 22px;
+}
+
+.project-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-content {
+  position: relative;
+  z-index: 1;
+}
+
+.project-content h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.project-content p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.project-arrow {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  color: var(--text-muted);
+  transition: all 0.3s;
+}
+
+.project-card:hover .project-arrow {
+  background: var(--accent);
+  color: var(--bg-primary);
+  transform: translateX(4px);
+}
+
+/* Category Specific Colors */
+.business .project-icon { background: rgba(255,107,53,0.15); color: #ff6b35; }
+.business .project-badge { background: rgba(255,107,53,0.15); color: #ff6b35; }
+.business .project-card:hover { border-color: rgba(255,107,53,0.4); }
+.business .project-card:hover .project-arrow { background: #ff6b35; }
+
+.personal .project-icon { background: rgba(0,212,170,0.15); color: var(--accent); }
+.personal .project-badge { background: rgba(0,212,170,0.15); color: var(--accent); }
+
+/* Blog Section */
+#blog {
+  padding: 120px 24px;
+}
+
+.blog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-featured {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 900px) {
+  .blog-featured {
+    grid-template-columns: 1fr;
+  }
+}
+
+.blog-card {
+  position: relative;
+  padding: 32px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+
+.blog-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.blog-card:hover {
+  border-color: rgba(0,212,170,0.3);
+  transform: translateY(-4px);
+}
+
+.blog-card:hover::before {
+  opacity: 1;
+}
+
+.blog-card.featured {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 320px;
+  background: 
+    linear-gradient(180deg, transparent 0%, rgba(10,10,15,0.9) 100%),
+    radial-gradient(circle at 30% 30%, rgba(0,212,170,0.15), transparent 50%);
+}
+
+.blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.blog-category {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: rgba(0,212,170,0.1);
+  padding: 6px 12px;
+  border-radius: 100px;
+}
+
+.blog-date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.blog-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.blog-card.featured h3 {
+  font-size: 26px;
+}
+
+.blog-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.blog-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 16px;
+  transition: gap 0.3s;
+}
+
+.blog-card:hover .blog-read-more {
+  gap: 12px;
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stats Section */
+#stats {
+  padding: 80px 24px;
+  background: rgba(255,255,255,0.01);
+}
+
+.stats-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stats-card {
+  text-align: center;
+  padding: 32px 24px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: all 0.4s;
+}
+
+.stats-card:hover {
+  background: rgba(0,212,170,0.05);
+  border-color: rgba(0,212,170,0.2);
+}
+
+.stats-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stats-label {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+/* Contact Section */
+#contact {
+  padding: 120px 24px;
+  position: relative;
+}
+
+.contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.contact-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 48px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 600px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.contact-card:hover {
+  background: rgba(0,212,170,0.05);
+  border-color: rgba(0,212,170,0.3);
+  transform: translateY(-4px);
+}
+
+.contact-card i {
+  font-size: 24px;
+  color: var(--text-primary);
+  transition: color 0.3s;
+}
+
+.contact-card:hover i {
+  color: var(--accent);
+}
+
+.contact-card span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.contact-card:hover span {
+  color: var(--text-primary);
+}
+
+/* Footer */
+footer {
+  padding: 32px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-text {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+/* Blog Modal */
+#blog-modal {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 2000;
+  overflow-y: auto;
+  display: none;
+  animation: modalIn 0.4s ease;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.modal-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  border-radius: 100px;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  transition: all 0.3s;
+}
+
+.modal-close:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-primary);
+}
+
+.modal-header {
+  margin-bottom: 40px;
+}
+
+.modal-category {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.modal-body {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.modal-body h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 32px 0 16px;
+}
+
+.modal-body ul {
+  margin: 16px 0;
+  padding-left: 24px;
+}
+
+.modal-body li {
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.modal-body li::marker {
+  color: var(--accent);
+}
+
+.modal-box {
+  background: rgba(0,212,170,0.05);
+  border: 1px solid rgba(0,212,170,0.2);
+  padding: 24px;
+  border-radius: 16px;
+  margin: 32px 0;
+}
+
+.modal-box p {
+  color: var(--text-primary);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Reading Progress */
+#reading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  z-index: 3000;
+  width: 0%;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,15,0.98);
+  z-index: 1500;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mobile-nav.active {
+  display: flex;
+}
+
+.mobile-nav a {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 16px;
+  transition: color 0.3s;
+}
+
+.mobile-nav a:hover {
+  color: var(--accent);
+}
+
+.mobile-nav-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 12px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  filter: contrast(1.05) brightness(0.95);
+  transition: all 0.4s ease;
+}
+
+.about-image-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+/* Glow halus */
+.about-image-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,10,15,0.8));
+}
+
+/* RG overlay */
+.avatar-overlay {
+  position: absolute;
+  bottom: 16px;
+  right: 18px;
+  font-family: 'Space Grotesk';
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Hover effect */
+.about-image-frame:hover .avatar-img {
+  transform: scale(1.08);
+}
+
+.center-footer {
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.center-footer a,
+.center-footer span {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.center-footer a:hover {
+  color: var(--accent);
+}
+</style>
+</head>
+
+<body>
+<div class="bg-gradient-animate"></div>
+<div class="noise-overlay"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div id="loader">
+  <div class="loader-logo">RG</div>
+  <div class="loader-bar"></div>
+</div>
+
+<div id="reading-bar"></div>
+
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="nav-logo"><span>Ragil</span>Gunawan<span>.my.id</span></a>
+    
+    <div class="nav-links">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#blog" class="nav-link">Blog</a>
+    </div>
+    
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+    
+    <button class="mobile-toggle" onclick="toggleMobileNav()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="toggleMobileNav()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <a href="#home" onclick="toggleMobileNav()">Home</a>
+  <a href="#about" onclick="toggleMobileNav()">About</a>
+  <a href="#projects" onclick="toggleMobileNav()">Projects</a>
+  <a href="#blog" onclick="toggleMobileNav()">Blog</a>
+  <a href="#contact" onclick="toggleMobileNav()">Contact</a>
+</div>
+
+<!-- Hero Section -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-badge">Available for Projects</div>
+    
+    <h1 class="hero-title">
+      <span class="name">Ragil Gunawan</span>
+      Creative Developer
+    </h1>
+    
+    <p class="hero-subtitle">
+      Membangun solusi digital yang cepat, ringan, dan berdampak. 
+      <br><strong>Dari ide hingga jadi nyata.
+    </br</strong></p>
+    
+    <p class="hero-typing" id="typing"></p>
+    
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">
+        Lihat Karya Saya
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+      <a href="#contact" class="btn-secondary">
+        <i class="fa-solid fa-comments"></i>
+        Diskusi Proyek
+      </a>
+    </div>
+  </div>
+  
+  <div class="hero-scroll">
+    <span>Scroll untuk eksplorasi</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+  <div class="about-container">
+    <div class="section-header">
+      <div class="section-label">
+        <i class="fa-solid fa-user"></i>
+        About Me
+      </div>
+      <h2 class="section-title">Mengenal Lebih Dekat Siapa di Balik Kode</h2>
+    </div>
+    
+    <div class="about-grid">
+      <div class="about-image">
+        <div class="about-image-frame">
+          <div class="about-avatar">
+  <img src="https://bankragilgunawan.wordpress.com/wp-content/uploads/2026/03/meitu_20260319_0528076106975264493933102842.jpg" class="avatar-img">
+  <div class="avatar-overlay">RG</div>
+</div>
+    <div class="about-stats">
+          <div class="stat-item">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Tahun Coding</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Proyek Selesai</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-content">
+        <h3>Halo! Saya <span>Ragil</span>, seorang Creative Developer dari Indonesia.</h3>
+        
+       <p>
+  Kebanyakan website gagal bukan karena jelek, 
+  tapi karena tidak menghasilkan apa-apa.
+</p>
+
+<p>
+  Saya membantu Anda membangun website yang bukan hanya tampil bagus, 
+  tapi benar-benar menghasilkan: leads, transaksi, dan pertumbuhan.
+</p>
+
+<p>
+  Fokus saya sederhana: 
+  <strong>lebih cepat, lebih ringan, dan lebih menghasilkan.</strong>
+</p>        
+        <div class="about-highlights">
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="highlight-text">
+              <h4>Performa Utama</h4>
+              <p>Website cepat loading, SEO-friendly, dan optimal di semua device.</p>
+            </div>
+          </div>
+          
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <div class="highlight-text">
+              <h4>Desain Modern</h4>
+              <p>UI yang clean, intuitif, dan memberikan experience terbaik.</p>
+            </div>
+          </div>
+          
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div class="highlight-text">
+              <h4>Automasi Cerdas</h4>
+              <p>Bot dan sistem otomatis untuk efisiensi bisnis maksimal.</p>
+            </div>
+          </div>
+          
+          <div class="highlight-item">
+            <div class="highlight-icon">
+            <i class="fa-solid fa-ban"></i></div>
+            <div class="highlight-text">
+              <h4>Offline-Ready</h4>
+              <p>Aplikasi yang bisa bekerja tanpa koneksi internet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+  <div class="projects-container">
+    <div class="section-header">
+      <div class="section-label">
+        <i class="fa-solid fa-folder-open"></i>
+        Portfolio
+      </div>
+      <h2 class="section-title">Karya Terpilih yang Pernah Saya Bangun</h2>
+    </div>
+    
+    <!-- Business Projects -->
+    <div class="projects-category">
+      <div class="category-title">
+        <div class="category-icon">
+          <i class="fa-solid fa-building"></i>
+        </div>
+        <div>
+          <h3>Proyek Bisnis</h3>
+          <p>Solusi digital untuk kebutuhan komersial dan transaksi</p>
+        </div>
+      </div>
+      
+      <div class="projects-grid">
+        <a href="/cuan-pulsa" class="project-card business">
+          <div class="project-header">
+            <div class="project-icon">
+            <i class="fa-solid fa-money-check-dollar"></i>            </div>
+            <span class="project-badge">Monetize</span>
+          </div>
+          <div class="project-content">
+            <h4>CuanPulsa</h4>
+            <p>
+  Mengubah pulsa tidak terpakai menjadi saldo digital 
+  dalam hitungan menit tanpa ribet.
+</p>          </div>
+          <div class="project-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+        
+        <a href="/Icell" class="project-card business">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fa-solid fa-signal"></i>
+            </div>
+            <span class="project-badge">Trusted</span>
+          </div>
+          <div class="project-content">
+            <h4>ICell Hub</h4>
+            <p>Pusat transaksi pulsa dan e-wallet murah, cepat, dan terpercaya. Dibangun untuk kebutuhan harian.</p>
+          </div>
+          <div class="project-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Personal Projects -->
+    <div class="projects-category">
+      <div class="category-title">
+        <div class="category-icon">
+          <i class="fa-solid fa-lightbulb"></i>
+        </div>
+        <div>
+          <h3>Proyek Kreatif</h3>
+          <p>Eksperimen dan alat bantu untuk meningkatkan produktivitas</p>
+        </div>
+      </div>
+      
+      <div class="projects-grid">
+        <a href="/bot-payment" class="project-card personal">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <span class="project-badge">Automasi</span>
+          </div>
+          <div class="project-content">
+            <h4>Smart Bot Payment</h4>
+            <p>Asisten otomatis untuk pembayaran dan transaksi. Bisa dikustomisasi sesuai kebutuhan bisnis Anda.</p>
+          </div>
+          <div class="project-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+        
+        <a href="/kado" class="project-card personal">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fa-solid fa-gift"></i>
+            </div>
+            <span class="project-badge">Special</span>
+          </div>
+          <div class="project-content">
+            <h4>Kado Spesial</h4>
+            <p>Buat hadiah digital yang unik dan personal untuk orang-orang spesial di hidup Anda.</p>
+          </div>
+          <div class="project-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+        
+        <a href="/struk-belanja" class="project-card personal">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fa-solid fa-receipt"></i>
+            </div>
+            <span class="project-badge">Offline</span>
+          </div>
+          <div class="project-content">
+            <h4>Nota Retro</h4>
+            <p>Generator struk belanja estetik dengan fitur offline. Versi Pro bisa digunakan tanpa internet.</p>
+          </div>
+          <div class="project-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+        
+        <a href="/link" class="project-card personal">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <span class="project-badge">Save</span>
+          </div>
+          <div class="project-content">
+            <h4>Link Vault</h4>
+            <p>Simpan link video favorit dalam satu tempat. Tonton kapanpun dan dimanapun Anda mau.</p>
+          </div>
+          <div class="project-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Section -->
+<section id="blog">
+  <div class="blog-container">
+    <div class="section-header">
+      <div class="section-label">
+        <i class="fa-solid fa-pen-fancy"></i>
+        Blog
+      </div>
+      <h2 class="section-title">Insight dan Tips Seputar Teknologi</h2>
+    </div>
+    
+    <div class="blog-featured">
+      <div class="blog-card featured" onclick="openBlog('marketing')">
+        <div class="blog-meta">
+          <span class="blog-category">Business Growth</span>
+          <span class="blog-date">Artikel Utama</span>
+        </div>
+        <h3>Cara Mengubah Website Menjadi Mesin Penarik Pelanggan Otomatis</h3>
+        <p>Jangan biarkan website Anda sepi. Pelajari strategi mengoptimalkan website untuk mendatangkan leads secara konsisten.</p>
+        <span class="blog-read-more">Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div class="blog-card" onclick="openBlog('faq')">
+          <div class="blog-meta">
+            <span class="blog-category">FAQ</span>
+          </div>
+          <h3>Q&A: Semua Tentang Jasa Saya</h3>
+          <p>Jawaban lengkap untuk pertanyaan yang sering diajukan.</p>
+          <span class="blog-read-more">Baca <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        
+        <div class="blog-card" onclick="openBlog('stack')">
+          <div class="blog-meta">
+            <span class="blog-category">Tech</span>
+          </div>
+          <h3>Tech Stack yang Saya Gunakan</h3>
+          <p>Tools dan teknologi pilihan untuk hasil maksimal.</p>
+          <span class="blog-read-more">Baca <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="blog-list">
+      <div class="blog-card" onclick="openBlog('dns')">
+        <div class="blog-meta">
+          <span class="blog-category">Tips</span>
+          <span class="blog-date">2 min read</span>
+        </div>
+        <h3>Bebas Iklan dengan DNS Kustom</h3>
+        <p>Trik sederhana blokir iklan di semua aplikasi tanpa install apa pun.</p>
+        <span class="blog-read-more">Baca <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+      
+      <div class="blog-card" onclick="openBlog('adsense')">
+        <div class="blog-meta">
+          <span class="blog-category">Monetize</span>
+          <span class="blog-date">5 min read</span>
+        </div>
+        <h3>Panduan Lengkap Lolos AdSense 2024</h3>
+        <p>Step-by-step dari persiapan hingga approval Google AdSense.</p>
+        <span class="blog-read-more">Baca <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+      
+      <div class="blog-card" onclick="openBlog('productivity')">
+        <div class="blog-meta">
+          <span class="blog-category">Productivity</span>
+          <span class="blog-date">3 min read</span>
+        </div>
+        <h3>Workflow Development yang Efisien</h3>
+        <p>Cara saya mengatur waktu dan tools untuk produktivitas maksimal.</p>
+        <span class="blog-read-more">Baca <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section id="stats">
+  <div class="stats-container">
+    <div class="stats-grid">
+      <div class="stats-card">
+        <div class="stats-number counter" data-target="20">0</div>
+        <div class="stats-label">Proyek Selesai</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-number counter" data-target="5">0</div>
+        <div class="stats-label">Tahun Pengalaman</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-number counter" data-target="15">0</div>
+        <div class="stats-label">Klien Puas</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-number counter" data-target="99">0</div>
+        <div class="stats-label">Kepuasan %</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <div class="contact-container">
+    <div class="section-label">
+      <i class="fa-solid fa-envelope"></i>
+      Contact
+    </div>
+    <h2 class="contact-title">Mari Bekerja Sama</h2>
+    <p class="contact-subtitle">Punya ide atau proyek? Langsung hubungi saya via channel favorit Anda.</p>
+    
+    <div class="contact-grid">
+      <a href="https://wa.me/6282121218466" class="contact-card">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </a>
+      <a href="https://instagram.com/masgunkasep" class="contact-card">
+        <i class="fa-brands fa-instagram"></i>
+        <span>Instagram</span>
+      </a>
+      <a href="https://tiktok.com/@goonaone" class="contact-card">
+        <i class="fa-brands fa-tiktok"></i>
+        <span>TikTok</span>
+      </a>
+      <a href="mailto:bankragilgunawan@gmail.com" class="contact-card">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Email</span>
+      </a>
+      <a href="https://facebook.com/anggun.agilian" class="contact-card">
+        <i class="fa-brands fa-facebook"></i>
+        <span>Facebook</span>
+      </a>
+      <a href="#" class="contact-card" onclick="openBlog('faq'); return false;">
+        <i class="fa-solid fa-circle-question"></i>
+        <span>FAQ Jasa</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content center-footer">
+    <a href="#" onclick="openFooter('disclaimer'); return false;">Disclaimer</a><span>•</span>
+    <a href="#" onclick="openFooter('privacy'); return false;">Privacy</a><span>•</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+<!-- Blog Modal -->
+<div id="blog-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeBlog()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Kembali
+    </button>
+    <div id="blog-content"></div>
+  </div>
+</div>
+
+<script>
+// Blog Data
+const blogData = {
+  marketing: {
+    category: "Business Growth",
+    title: "Cara Mengubah Website Menjadi Mesin Penarik Pelanggan Otomatis",
+    body: `
+      <p>Di era digital ini, website bukan sekadar kartu nama online. Website yang dirancang dengan benar bisa menjadi mesin penarik pelanggan yang bekerja 24/7 tanpa henti.</p>
+      
+      <h4>Mengapa Website Penting untuk Bisnis?</h4>
+      <p>Bayangkan memiliki sales yang bekerja tanpa lelah, tidak membutuhkan gaji bulanan, dan bisa melayani ratusan pelanggan sekaligus. Itulah fungsi website yang dioptimalkan dengan benar.</p>
+      
+      <h4>Komponen Website yang Mengonversi</h4>
+      <ul>
+        <li><strong>Kecepatan Loading</strong> - Pengunjung tidak sabar. 1 detik keterlambatan = 7% penurunan konversi.</li>
+        <li><strong>Mobile-First Design</strong> - 70% pengunjung datang dari smartphone.</li>
+        <li><strong>Call-to-Action yang Jelas</strong> - Tunjukkan apa yang harus dilakukan pengunjung.</li>
+        <li><strong>Trust Elements</strong> - Testimonial, sertifikasi, dan kontak yang terpercaya.</li>
+      </ul>
+      
+      <div class="modal-box">
+        <p>Website yang saya buat menggabungkan semua elemen ini untuk memastikan setiap pengunjung punya potensi menjadi pelanggan.</p>
+      </div>
+      
+      <h4>Langkah Selanjutnya</h4>
+      <p>Jika Anda ingin memiliki website yang benar-benar bekerja untuk bisnis Anda, mari diskusikan kebutuhan Anda. Setiap bisnis unik, dan website Anda harus mencerminkan keunikan tersebut.</p>
+    `
+  },
+  faq: {
+    category: "FAQ",
+    title: "Q&A: Semua Tentang Jasa Development Saya",
+    body: `
+      <h4>Siapa Ragil Gunawan?</h4>
+      <p>Creative Developer yang fokus pada efisiensi dan hasil. Saya membangun solusi digital dengan bantuan AI untuk mempercepat proses development tanpa mengurangi kualitas.</p>
+      
+      <h4>Kenapa Memilih Saya?</h4>
+      <ul>
+        <li><strong>Cepat</strong> - Proses development yang efisien tanpa mengorbankan kualitas.</li>
+        <li><strong>Ringan</strong> - Website yang saya buat selalu optimal dari sisi performa.</li>
+        <li><strong>Berorientasi Hasil</strong> - Fokus pada tujuan bisnis Anda, bukan sekadar teknis.</li>
+      </ul>
+      
+      <h4>Apa Saja yang Saya Tawarkan?</h4>
+      <ul>
+        <li>Landing Page Bisnis / UMKM</li>
+        <li>Aplikasi Kasir Offline (Nota Retro)</li>
+        <li>Automasi Bot & Scripting</li>
+        <li>Optimasi Performa Website</li>
+        <li>Sistem Pembayaran Terintegrasi</li>
+      </ul>
+      
+      <div class="modal-box">
+        <p>Siap memulai proyek? Hubungi saya via WhatsApp untuk konsultasi gratis!</p>
+      </div>
+    `
+  },
+  stack: {
+    category: "Tech Stack",
+    title: "Teknologi dan Tools yang Saya Gunakan",
+    body: `
+      <p>Untuk memberikan hasil terbaik, saya menggunakan kombinasi teknologi modern yang sudah teruji dan efisien.</p>
+      
+      <h4>Frontend</h4>
+      <ul>
+        <li><strong>HTML/CSS/JavaScript</strong> - Fondasi yang solid dan universal.</li>
+        <li><strong>Tailwind CSS</strong> - Styling cepat dan konsisten.</li>
+        <li><strong>Vanilla JS</strong> - Performa optimal tanpa overhead framework.</li>
+      </ul>
+      
+      <h4>Backend & Database</h4>
+      <ul>
+        <li><strong>Node.js</strong> - Untuk aplikasi real-time dan API.</li>
+        <li><strong>Firebase</strong> - Backend as a Service untuk kecepatan development.</li>
+        <li><strong>Local Storage / IndexedDB</strong> - Untuk fitur offline.</li>
+      </ul>
+      
+      <h4>Tools</h4>
+      <ul>
+        <li><strong>VS Code</strong> - Editor utama.</li>
+        <li><strong>Git</strong> - Version control.</li>
+        <li><strong>AI Assistants</strong> - Mempercepat proses coding.</li>
+      </ul>
+    `
+  },
+  dns: {
+    category: "Tips",
+    title: "Bebas Iklan dengan DNS Kustom",
+    body: `
+      <p>Ingin browsing tanpa iklan tanpa install aplikasi apapun? Gunakan DNS kustom yang sudah terkonfigurasi untuk memblokir iklan.</p>
+      
+      <h4>Cara Setting di Android</h4>
+      <ul>
+        <li>Buka Settings > Network & Internet</li>
+        <li>Pilih Private DNS</li>
+        <li>Pilih "Private DNS provider hostname"</li>
+        <li>Masukkan: <strong>dns.adguard.com</strong></li>
+        <li>Save dan selesai!</li>
+      </ul>
+      
+      <h4>Keuntungan</h4>
+      <ul>
+        <li>Blokir iklan di semua aplikasi</li>
+        <li>Tidak perlu install aplikasi tambahan</li>
+        <li>Hemat baterai dan data</li>
+        <li>Browsing lebih cepat</li>
+      </ul>
+      
+      <div class="modal-box">
+        <p>Tips ini bekerja di sebagian besar aplikasi. Untuk hasil maksimal, kombinasikan dengan browser yang mendukung content blocking.</p>
+      </div>
+    `
+  },
+  adsense: {
+    category: "Monetize",
+    title: "Panduan Lengkap Lolos AdSense 2024",
+    body: `
+      <p>Google AdSense masih menjadi cara paling populer untuk monetisasi website. Berikut panduan lengkap untuk lolos review.</p>
+      
+      <h4>Persyaratan Dasar</h4>
+      <ul>
+        <li>Minimal 20-30 artikel berkualitas</li>
+        <li>Domain yang sudah berusia minimal 1 bulan</li>
+        <li>Konten original, bukan hasil copy-paste</li>
+        <li>Halaman Privacy Policy, Disclaimer, dan About</li>
+      </ul>
+      
+      <h4>Tips Cepat Lolos</h4>
+      <ul>
+        <li><strong>Desain Profesional</strong> - Template yang clean dan navigasi jelas.</li>
+        <li><strong>Konten Konsisten</strong> - Post artikel secara teratur.</li>
+        <li><strong>Trafik Organik</strong> - Hindari trafik bot atau traffic exchange.</li>
+        <li><strong>Niche Spesifik</strong> - Fokus pada satu topik tertentu.</li>
+      </ul>
+      
+      <div class="modal-box">
+        <p>Butuh bantuan membuat website yang siap AdSense? Saya bisa membantu dari A sampai Z!</p>
+      </div>
+    `
+  },
+  productivity: {
+    category: "Productivity",
+    title: "Workflow Development yang Efisien",
+    body: `
+      <p>Sebagai developer freelance, produktivitas adalah kunci. Berikut cara saya mengatur workflow agar tetap efisien.</p>
+      
+      <h4>Pagi Hari</h4>
+      <ul>
+        <li>Review task hari ini</li>
+        <li>Cek email dan pesan klien</li>
+        <li>Coding session pertama (2-3 jam)</li>
+      </ul>
+      
+      <h4>Siang Hari</h4>
+      <ul>
+        <li>Meeting atau diskusi dengan klien</li>
+        <li>Review progress</li>
+        <li>Dokumentasi</li>
+      </ul>
+      
+      <h4>Sore Hari</h4>
+      <ul>
+        <li>Coding session kedua</li>
+        <li>Testing dan debugging</li>
+        <li>Prepare untuk esok hari</li>
+      </ul>
+      
+      <h4>Tools Wajib</h4>
+      <ul>
+        <li><strong>Notion</strong> - Untuk catatan dan project management</li>
+        <li><strong>GitHub</strong> - Version control</li>
+        <li><strong>Pomodoro Timer</strong> - Focus management</li>
+      </ul>
+      
+      <div class="modal-box">
+        <p>Kunci utama: fokus pada satu task dalam satu waktu. Multitasking adalah mitos!</p>
+      </div>
+    `
+  }
+};
+
+const footerData = {
+  disclaimer: {
+    title: "Disclaimer",
+    body: `
+      <p>Semua konten pada website ini dibuat untuk tujuan informasi dan portofolio.</p>
+      <p>Saya berusaha menjaga informasi tetap akurat, namun tidak menjamin kelengkapan atau keakuratan secara mutlak.</p>
+      <p>Segala tindakan yang Anda ambil berdasarkan informasi di website ini adalah tanggung jawab Anda sendiri.</p>
+    `
+  },
+  privacy: {
+    title: "Privacy Policy",
+    body: `
+      <p>Website ini tidak mengumpulkan data pribadi tanpa izin Anda.</p>
+      <p>Jika Anda menghubungi melalui WhatsApp, Email, atau platform lain, data hanya digunakan untuk komunikasi dan tidak dibagikan ke pihak lain.</p>
+      <p>Saya menghargai privasi Anda dan menjaga keamanan informasi yang diberikan.</p>
+    `
+  }
+};
+
+// Initialize variables first
+const cursorGlow = document.getElementById("cursorGlow");
+const navbar = document.getElementById("navbar");
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-link");
+const readingBar = document.getElementById("reading-bar");
+const counters = document.querySelectorAll(".counter");
+
+// Loader
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.getElementById("loader").classList.add("hidden");
+  }, 800);
+});
+
+// Cursor Glow
+document.addEventListener("mousemove", (e) => {
+  if (cursorGlow) {
+    cursorGlow.style.left = e.clientX + "px";
+    cursorGlow.style.top = e.clientY + "px";
+  }
+});
+
+// Navbar Scroll Effect
+window.addEventListener("scroll", () => {
+  if (navbar) {
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  }
+});
+
+// Scroll Spy
+window.addEventListener("scroll", () => {
+  let current = "";
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (pageYOffset >= sectionTop - 200) {
+      current = section.getAttribute("id");
+    }
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href").includes(current)) {
+      link.classList.add("active");
+    }
+  });
+});
+
+// Section Reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.1 });
+
+sections.forEach(sec => observer.observe(sec));
+
+// Reading Bar
+window.addEventListener("scroll", () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrollPercent = (scrollTop / scrollHeight) * 100;
+  if (readingBar) {
+    readingBar.style.width = scrollPercent + "%";
+  }
+});
+
+// Counter Animation
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counter = entry.target;
+      const target = parseInt(counter.getAttribute("data-target"));
+      const duration = 2000;
+      const startTime = performance.now();
+      
+      const updateCounter = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(easeOut * target);
+        
+        counter.textContent = current + (target === 99 ? "%" : "+");
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = target + (target === 99 ? "%" : "+");
+        }
+      };
+      
+      requestAnimationFrame(updateCounter);
+      counterObserver.unobserve(counter);
+    }
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(counter => counterObserver.observe(counter));
+
+// Typing Animation
+const typingText = "Website cepat itu biasa. Website yang menghasilkan itu beda.";
+let typingIndex = 0;
+const typingElement = document.getElementById("typing");
+
+function typeWriter() {
+  if (typingIndex < typingText.length && typingElement) {
+    typingElement.textContent += typingText.charAt(typingIndex);
+    typingIndex++;
+    setTimeout(typeWriter, 50);
+  }
+}
+
+setTimeout(typeWriter, 1000);
+
+// Mobile Navigation
+function toggleMobileNav() {
+  const mobileNav = document.getElementById("mobileNav");
+  if (mobileNav) {
+    mobileNav.classList.toggle("active");
+  }
+}
+
+// Blog Modal
+function openBlog(id) {
+  const post = blogData[id];
+  if (!post) return;
+  
+  const blogContent = document.getElementById("blog-content");
+  if (blogContent) {
+    blogContent.innerHTML = `
+      <div class="modal-header">
+        <div class="modal-category">${post.category}</div>
+        <h1 class="modal-title">${post.title}</h1>
+      </div>
+      <div class="modal-body">${post.body}</div>
+    `;
+  }
+  
+  const modal = document.getElementById("blog-modal");
+  if (modal) {
+    modal.style.display = "block";
+  }
+  document.body.style.overflow = "hidden";
+}
+
+function openFooter(id) {
+  const data = footerData[id];
+  if (!data) return;
+
+  const blogContent = document.getElementById("blog-content");
+  blogContent.innerHTML = `
+    <div class="modal-header">
+      <h1 class="modal-title">${data.title}</h1>
+    </div>
+    <div class="modal-body">${data.body}</div>
+  `;
+
+  document.getElementById("blog-modal").style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+
+function closeBlog() {
+  const modal = document.getElementById("blog-modal");
+  if (modal) {
+    modal.style.display = "none";
+  }
+  document.body.style.overflow = "auto";
+}
+
+// Close modal on escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeBlog();
+    const mobileNav = document.getElementById("mobileNav");
+    if (mobileNav && mobileNav.classList.contains("active")) {
+      toggleMobileNav();
+    }
+  }
+});
+
+// Project Card Tilt Effect
+const projectCards = document.querySelectorAll(".project-card");
+
+projectCards.forEach(card => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 25;
+    const rotateY = (centerX - x) / 25;
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+  });
+  
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "perspective(1000px) rotateX(0) rotateY(0)";
+  });
+});
+
+// Contact Card Hover Effect
+const contactCards = document.querySelectorAll(".contact-card");
+
+contactCards.forEach(card => {
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    
+    card.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) translateY(-4px)`;
+  });
+  
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "translate(0, 0)";
+  });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    const href = this.getAttribute("href");
+
+    // skip kalau cuma "#"
+    if (href === "#") return;
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    e.preventDefault();
+
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
+});
+
+// Prefers reduced motion
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.querySelectorAll(".orb").forEach(orb => {
+    orb.style.animation = "none";
+  });
+}
+
+</script>
+</body>
+  </html>
