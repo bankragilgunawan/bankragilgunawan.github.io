@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Target Pertumbuhan 3% Per Hari</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --success: #10b981;
+      --success-light: rgba(16, 185, 129, 0.15);
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Header & Summary Cards */
+    .header {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #a5b4fc, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.4rem;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.2rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-title {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .card-value.success {
+      color: var(--success);
+    }
+
+    /* Progress Bar */
+    .progress-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #6366f1, #10b981);
+      border-radius: 10px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Checklist Section */
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 550px;
+      overflow-y: auto;
+      padding-right: 0.3rem;
+    }
+
+    /* Custom Scrollbar */
+    .list-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .list-container::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+    .list-container::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    .item-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .item-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Custom Checkbox UX */
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--text-muted);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      color: transparent;
+      font-size: 0.8rem;
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-step {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .item-amount {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .item-growth {
+      font-size: 0.75rem;
+      color: var(--success);
+      font-weight: 600;
+      background: var(--success-light);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    /* Completed State Styling */
+    .item-card.completed {
+      background: rgba(30, 41, 59, 0.6);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .item-card.completed .checkbox {
+      background: var(--success);
+      border-color: var(--success);
+      color: white;
+    }
+
+    .item-card.completed .item-amount {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>Tracker Pertumbuhan +3%</h1>
+      <p>Modal Awal Rp 1.000.000 dengan Majemuk 3% per Langkah</p>
+    </div>
+
+    <!-- Dashboards -->
+    <div class="summary-grid">
+      <div class="card">
+        <div class="card-title">Pencapaian</div>
+        <div class="card-value" id="completed-count">0 / 150</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Saldo Saat Ini</div>
+        <div class="card-value success" id="current-balance">Rp 1.000.000</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="card progress-card">
+      <div class="progress-header">
+        <span>Progress Target</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Interactive Checklist -->
+    <div class="list-container" id="checklist">
+      <!-- Generated items will appear here -->
+    </div>
+  </div>
+
+  <script>
+    const initialAmount = 1000000;
+    const rate = 0.03;
+    const totalSteps = 150;
+    
+    // Simpan status di localStorage agar tidak hilang saat di-refresh
+    let completedSteps = JSON.parse(localStorage.getItem('target_3percent_steps')) || [];
+
+    function formatIDR(amount) {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        maximumFractionDigits: 0
+      }).format(amount);
+    }
+
+    function calculateData() {
+      let data = [];
+      let current = initialAmount;
+      for (let i = 1; i <= totalSteps; i++) {
+        current = current * (1 + rate);
+        data.push({
+          step: i,
+          amount: current,
+          profit: current - (i === 1 ? initialAmount : data[i - 2].amount)
+        });
+      }
+      return data;
+    }
+
+    const stepsData = calculateData();
+
+    function updateDashboard() {
+      const count = completedSteps.length;
+      const percent = Math.round((count / totalSteps) * 100);
+      
+      document.getElementById('completed-count').innerText = `${count} / ${totalSteps}`;
+      document.getElementById('progress-percent').innerText = `${percent}%`;
+      document.getElementById('progress-fill').style.width = `${percent}%`;
+
+      // Update Saldo Saat ini berdasarkan langkah terakhir yang dicentang
+      if (count > 0) {
+        const lastStepIndex = Math.max(...completedSteps) - 1;
+        document.getElementById('current-balance').innerText = formatIDR(stepsData[lastStepIndex].amount);
+      } else {
+        document.getElementById('current-balance').innerText = formatIDR(initialAmount);
+      }
+
+      // Simpan ke storage
+      localStorage.setItem('target_3percent_steps', JSON.stringify(completedSteps));
+    }
+
+    function toggleStep(stepNumber) {
+      if (completedSteps.includes(stepNumber)) {
+        completedSteps = completedSteps.filter(s => s !== stepNumber);
+      } else {
+        completedSteps.push(stepNumber);
+      }
+
+      const card = document.getElementById(`step-card-${stepNumber}`);
+      card.classList.toggle('completed');
+
+      updateDashboard();
+    }
+
+    function renderList() {
+      const container = document.getElementById('checklist');
+      container.innerHTML = '';
+
+      stepsData.forEach(item => {
+        const isChecked = completedSteps.includes(item.step);
+        
+        const card = document.createElement('div');
+        card.id = `step-card-${item.step}`;
+        card.className = `item-card ${isChecked ? 'completed' : ''}`;
+        card.onclick = () => toggleStep(item.step);
+
+        card.innerHTML = `
+          <div class="item-left">
+            <div class="checkbox">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="item-info">
+              <span class="item-step">Hari / Target #${item.step}</span>
+              <span class="item-amount">${formatIDR(item.amount)}</span>
+            </div>
+          </div>
+          <div class="item-growth">+${formatIDR(item.profit)}</div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Inisialisasi awal
+    renderList();
+    updateDashboard();
+  </script>
+</body>
+</html>
